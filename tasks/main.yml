@@ -1,0 +1,14 @@
+---
+# tasks file for httpd
+- name: Install httpd
+  become: yes
+  yum:
+    name: httpd
+    state: latest
+- name: Copy index.html
+  become: yes
+  copy:
+    src: "{{ role_path }}/files/index.html"
+    dest: /var/www/html/
+  notify:
+    - Start httpd
